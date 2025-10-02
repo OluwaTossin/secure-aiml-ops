@@ -1,0 +1,92 @@
+{
+  "airflow_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::455921291596:role/secure-aiml-ops-airflow-execution-role"
+  },
+  "alb_security_group_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "sg-01f8fd8bbc00df18c"
+  },
+  "bedrock_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::455921291596:role/secure-aiml-ops-bedrock-access-role"
+  },
+  "cloudwatch_log_group_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "/aws/secure-aiml-ops"
+  },
+  "database_security_group_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "sg-0def6cf734ad61cfb"
+  },
+  "ecr_repository_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:ecr:eu-west-1:455921291596:repository/secure-aiml-ops"
+  },
+  "ecr_repository_url": {
+    "sensitive": false,
+    "type": "string",
+    "value": "455921291596.dkr.ecr.eu-west-1.amazonaws.com/secure-aiml-ops"
+  },
+  "ecr_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::455921291596:role/secure-aiml-ops-ecr-access-role"
+  },
+  "ecs_task_execution_role_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:iam::455921291596:role/secure-aiml-ops-ecs-task-execution-role"
+  },
+  "internal_security_group_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "sg-081d5c646c3dd000c"
+  },
+  "nat_gateway_ip": {
+    "sensitive": false,
+    "type": "string",
+    "value": "54.216.248.237"
+  },
+  "private_subnet_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "subnet-08070ec31d4e0a949"
+  },
+  "public_subnet_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "subnet-0e446a44a926e5140"
+  },
+  "s3_data_bucket_arn": {
+    "sensitive": false,
+    "type": "string",
+    "value": "arn:aws:s3:::secure-aiml-ops-data-4y1ypkr7"
+  },
+  "s3_data_bucket_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "secure-aiml-ops-data-4y1ypkr7"
+  },
+  "vpc_cidr_block": {
+    "sensitive": false,
+    "type": "string",
+    "value": "10.0.0.0/16"
+  },
+  "vpc_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "vpc-02bd95baded31f3ca"
+  },
+  "web_security_group_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "sg-06eea7ec4649d663e"
+  }
+}
