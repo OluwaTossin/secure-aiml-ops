@@ -98,6 +98,11 @@ resource "aws_s3_bucket_lifecycle_configuration" "data_lifecycle" {
     id     = "data_lifecycle"
     status = "Enabled"
 
+    # Apply to all objects in the bucket
+    filter {
+      prefix = ""
+    }
+
     # Archive old data to IA after 30 days
     transition {
       days          = 30
