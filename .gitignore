@@ -1,0 +1,222 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Scrapy stuff:
+.scrapy
+
+# Sphinx documentation
+docs/_build/
+
+# PyBuilder
+target/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# IPython
+profile_default/
+ipython_config.py
+
+# pyenv
+.python-version
+
+# pipenv
+Pipfile.lock
+
+# PEP 582
+__pypackages__/
+
+# Celery stuff
+celerybeat-schedule
+celerybeat.pid
+
+# SageMath parsed files
+*.sage.py
+
+# Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Spyder project settings
+.spyderproject
+.spyproject
+
+# Rope project settings
+.ropeproject
+
+# mkdocs documentation
+/site
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Pyre type checker
+.pyre/
+
+# AWS and Cloud
+.aws/
+*.pem
+*.key
+
+# Terraform
+*.tfstate
+*.tfstate.*
+*.tfplan
+*.tflock.info
+.terraform/
+.terraform.lock.hcl
+terraform.tfvars
+.terraformrc
+terraform.rc
+
+# Docker
+.dockerignore
+Dockerfile.prod
+
+# Airflow
+airflow/logs/
+airflow/dags/__pycache__/
+airflow/plugins/__pycache__/
+airflow.cfg
+airflow.db
+webserver_config.py
+
+# Streamlit
+.streamlit/
+
+# Data files
+data/raw/*
+data/processed/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Model files
+models/*.pkl
+models/*.h5
+models/*.pt
+models/*.pth
+models/*.onnx
+!models/.gitkeep
+
+# Logs
+logs/
+*.log
+
+# Output files
+outputs/
+results/
+artifacts/
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Copilot generated files
+copilot/.addons/
+copilot/environments/*/addons/
+copilot/environments/*/network/
+
+# Secrets and credentials
+secrets/
+credentials/
+*.secret
+*.creds
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Node modules (if any JavaScript tooling)
+node_modules/
+
+# MLflow
+mlruns/
+
+# Weights & Biases
+wandb/
+
+# HuggingFace cache
+.cache/
+transformers_cache/

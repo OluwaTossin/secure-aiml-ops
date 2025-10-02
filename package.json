@@ -1,0 +1,36 @@
+{
+  "name": "secure-aiml-ops",
+  "version": "1.0.0",
+  "description": "Scalable AI/ML Infrastructure Deployment on AWS with Secure Containerization and Orchestration",
+  "main": "index.js",
+  "scripts": {
+    "setup": "bash scripts/setup.sh",
+    "deploy-infra": "cd infrastructure && terraform apply",
+    "build-docker": "docker build -t secure-aiml-ops .",
+    "deploy": "copilot svc deploy --name streamlit-app",
+    "test": "pytest tests/",
+    "lint": "flake8 . && black --check .",
+    "docs": "mkdocs serve"
+  },
+  "keywords": [
+    "aws",
+    "ai",
+    "ml",
+    "infrastructure",
+    "containerization",
+    "devsecops",
+    "airflow",
+    "streamlit",
+    "bedrock"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/secure-aiml-ops.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/secure-aiml-ops/issues"
+  },
+  "homepage": "https://github.com/yourusername/secure-aiml-ops#readme"
+}
