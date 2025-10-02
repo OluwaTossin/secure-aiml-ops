@@ -1,0 +1,25 @@
+# AWS Configuration
+aws_region = "eu-west-1"
+
+# Project Configuration
+project_name = "secure-aiml-ops"
+environment  = "development"
+
+# VPC Configuration
+vpc_cidr              = "10.0.0.0/16"
+public_subnet_cidr    = "10.0.1.0/24"
+private_subnet_cidr   = "10.0.2.0/24"
+
+# ECR Configuration
+ecr_repository_name = "secure-aiml-ops"
+
+# EC2 Configuration
+instance_type   = "t2.micro"
+key_pair_name   = ""  # Add your key pair name here
+
+# Security Configuration
+enable_encryption = true
+enable_guardduty  = true
+
+# Monitoring Configuration
+cloudwatch_log_retention_days = 30

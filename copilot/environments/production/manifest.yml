@@ -1,0 +1,46 @@
+# The manifest for the "production" environment.
+# Read the full specification for the "Environment" type at:
+#  https://aws.github.io/copilot-cli/docs/manifest/environment/
+
+# Your environment name will be used in naming your resources like VPC, cluster, etc.
+name: production
+type: Environment
+
+# Import existing resources (if using Terraform-created VPC)
+# import:
+#   vpc_id: ${VPC_ID}
+#   private_subnet_ids: ["${PRIVATE_SUBNET_ID}"]
+#   public_subnet_ids: ["${PUBLIC_SUBNET_ID}"]
+
+# Configure the network for this environment.
+network:
+  vpc:
+    enable: false  # Set to false if importing existing VPC
+    cidr: "10.0.0.0/16"
+  cdn:
+    # Optional CloudFront distribution for the Load Balancer.
+    certificate_arn: ""  # Optional certificate for HTTPS
+
+# Configure environment variables for all services in this environment.
+variables:
+  PROJECT_NAME: "secure-aiml-ops"
+  AWS_REGION: "eu-west-1"
+  ENVIRONMENT: "production"
+
+# Configure secrets for all services in this environment.
+# secrets:
+#   DATABASE_PASSWORD:
+#     from_cfn_output: DatabasePassword
+
+# Override default resources like the VPC or ECS Cluster.
+# resources:
+#   # Uncomment to override the default VPC CIDR block.
+#   vpc:
+#     cidr: "10.1.0.0/16"
+#   # Uncomment to override the default security group for the Load Balancer.
+#   load_balancer_security_group:
+#     ingress:
+#       - from_port: 80
+#         to_port: 80
+#         protocol: tcp
+#         cidr_blocks: ["0.0.0.0/0"]

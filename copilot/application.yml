@@ -1,0 +1,42 @@
+# The manifest for the "secure-aiml-ops" application.
+# Read the full specification for the "Application" type at:
+#  https://aws.github.io/copilot-cli/docs/manifest/application/
+
+# Your application name will be used in naming your resources like log groups, ECS services, etc.
+name: secure-aiml-ops
+
+# Import existing AWS resources into your application.
+# Uncomment and modify the following section if you want to import existing resources.
+# imports:
+#   vpc:
+#     id: ${VPC_ID}
+#   security_group:
+#     id: ${SECURITY_GROUP_ID}
+
+# Configure domain settings for your application.
+# domain:
+#   name: "secure-aiml-ops.com"
+#   certificate:
+#     arn: "arn:aws:acm:us-east-1:123456789012:certificate/..."
+
+# Network configuration
+network:
+  vpc:
+    enable: true
+    cidr: "10.0.0.0/16"
+    subnets:
+      public:
+        - cidr: "10.0.1.0/24"
+          az: "a"
+        - cidr: "10.0.3.0/24"
+          az: "b"
+      private:
+        - cidr: "10.0.2.0/24"
+          az: "a"
+        - cidr: "10.0.4.0/24"
+          az: "b"
+
+# Tags to apply to AWS resources.
+tags:
+  Project: "secure-aiml-ops"
+  Environment: "development"

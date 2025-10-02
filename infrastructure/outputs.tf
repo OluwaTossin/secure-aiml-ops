@@ -26,6 +26,16 @@ output "internal_security_group_id" {
   value       = aws_security_group.internal.id
 }
 
+output "database_security_group_id" {
+  description = "ID of the database security group"
+  value       = aws_security_group.database.id
+}
+
+output "alb_security_group_id" {
+  description = "ID of the ALB security group"
+  value       = aws_security_group.alb.id
+}
+
 # ECR Repository
 output "ecr_repository_url" {
   description = "URL of the ECR repository"
@@ -53,8 +63,35 @@ output "ecr_role_arn" {
   value       = aws_iam_role.ecr_access_role.arn
 }
 
+output "ecs_task_execution_role_arn" {
+  description = "ARN of the ECS task execution role"
+  value       = aws_iam_role.ecs_task_execution_role.arn
+}
+
 # CloudWatch Log Group
 output "cloudwatch_log_group_name" {
   description = "Name of the CloudWatch log group"
   value       = aws_cloudwatch_log_group.main.name
+}
+
+# S3 Bucket
+output "s3_data_bucket_name" {
+  description = "Name of the S3 data bucket"
+  value       = aws_s3_bucket.data.bucket
+}
+
+output "s3_data_bucket_arn" {
+  description = "ARN of the S3 data bucket"
+  value       = aws_s3_bucket.data.arn
+}
+
+# Network Configuration
+output "nat_gateway_ip" {
+  description = "Elastic IP of the NAT Gateway"
+  value       = aws_eip.nat.public_ip
+}
+
+output "vpc_cidr_block" {
+  description = "CIDR block of the VPC"
+  value       = aws_vpc.main.cidr_block
 }
