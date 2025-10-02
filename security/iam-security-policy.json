@@ -1,0 +1,115 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "BedrockMinimalAccess",
+      "Effect": "Allow",
+      "Action": [
+        "bedrock:InvokeModel",
+        "bedrock:InvokeModelWithResponseStream"
+      ],
+      "Resource": [
+        "arn:aws:bedrock:*::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0",
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-pro-v1:0",
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-lite-v1:0",
+        "arn:aws:bedrock:*::foundation-model/amazon.nova-micro-v1:0",
+        "arn:aws:bedrock:*::foundation-model/amazon.titan-text-express-v1",
+        "arn:aws:bedrock:*::foundation-model/mistral.mistral-large-2402-v1:0"
+      ],
+      "Condition": {
+        "StringEquals": {
+          "aws:RequestedRegion": ["us-east-1", "us-west-2"]
+        }
+      }
+    },
+    {
+      "Sid": "ECRReadOnlyAccess",
+      "Effect": "Allow",
+      "Action": [
+        "ecr:GetAuthorizationToken",
+        "ecr:BatchCheckLayerAvailability",
+        "ecr:GetDownloadUrlForLayer",
+        "ecr:BatchGetImage"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringLike": {
+          "ecr:repository": "secure-aiml-ops/*"
+        }
+      }
+    },
+    {
+      "Sid": "ECSTaskExecution",
+      "Effect": "Allow",
+      "Action": [
+        "ecs:DescribeTasks",
+        "ecs:DescribeServices",
+        "ecs:DescribeClusters"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "ecs:cluster": "arn:aws:ecs:*:*:cluster/secure-aiml-ops-*"
+        }
+      }
+    },
+    {
+      "Sid": "CloudWatchLogsAccess",
+      "Effect": "Allow",
+      "Action": [
+        "logs:CreateLogGroup",
+        "logs:CreateLogStream",
+        "logs:PutLogEvents",
+        "logs:DescribeLogStreams",
+        "logs:DescribeLogGroups"
+      ],
+      "Resource": [
+        "arn:aws:logs:*:*:log-group:/aws/ecs/secure-aiml-ops*",
+        "arn:aws:logs:*:*:log-group:/aws/lambda/secure-aiml-ops*"
+      ]
+    },
+    {
+      "Sid": "S3SecureAccess",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+      ],
+      "Resource": [
+        "arn:aws:s3:::secure-aiml-ops-data/*",
+        "arn:aws:s3:::secure-aiml-ops-models/*"
+      ],
+      "Condition": {
+        "Bool": {
+          "aws:SecureTransport": "true"
+        },
+        "StringEquals": {
+          "s3:x-amz-server-side-encryption": "AES256"
+        }
+      }
+    },
+    {
+      "Sid": "DenyInsecureConnections",
+      "Effect": "Deny",
+      "Action": "*",
+      "Resource": "*",
+      "Condition": {
+        "Bool": {
+          "aws:SecureTransport": "false"
+        }
+      }
+    },
+    {
+      "Sid": "DenyRootUserAccess",
+      "Effect": "Deny",
+      "Action": "*",
+      "Resource": "*",
+      "Condition": {
+        "StringEquals": {
+          "aws:userid": "AIDA*"
+        }
+      }
+    }
+  ]
+}
