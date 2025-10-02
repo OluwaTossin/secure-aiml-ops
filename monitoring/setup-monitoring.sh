@@ -71,10 +71,7 @@ create_metric_filters() {
         --filter-name "ApplicationErrors" \
         --filter-pattern '[timestamp, request_id, level="ERROR", ...]' \
         --metric-transformations \
-            metricName="ApplicationErrorRate",\
-            metricNamespace="SecureAIMLOps/Application",\
-            metricValue="1",\
-            defaultValue="0" \
+            metricName=ApplicationErrorRate,metricNamespace=SecureAIMLOps/Application,metricValue=1,defaultValue=0 \
         --region ${REGION}
     
     # API response time metric filter
@@ -83,10 +80,7 @@ create_metric_filters() {
         --filter-name "APIResponseTime" \
         --filter-pattern '[timestamp, request_id, "response_time", duration]' \
         --metric-transformations \
-            metricName="APIResponseTime",\
-            metricNamespace="SecureAIMLOps/Performance",\
-            metricValue="$duration",\
-            defaultValue="0" \
+            metricName=APIResponseTime,metricNamespace=SecureAIMLOps/Performance,metricValue='$duration',defaultValue=0 \
         --region ${REGION}
     
     # Bedrock usage metric filter
@@ -95,10 +89,7 @@ create_metric_filters() {
         --filter-name "BedrockAPICalls" \
         --filter-pattern '[timestamp, model_id, tokens_used, cost]' \
         --metric-transformations \
-            metricName="BedrockTokensUsed",\
-            metricNamespace="SecureAIMLOps/AI",\
-            metricValue="$tokens_used",\
-            defaultValue="0" \
+            metricName=BedrockTokensUsed,metricNamespace=SecureAIMLOps/AI,metricValue='$tokens_used',defaultValue=0 \
         --region ${REGION}
     
     # Memory utilization metric filter
@@ -107,10 +98,7 @@ create_metric_filters() {
         --filter-name "MemoryUtilization" \
         --filter-pattern '[timestamp, container_id, "memory_usage", memory_mb]' \
         --metric-transformations \
-            metricName="ContainerMemoryUsage",\
-            metricNamespace="SecureAIMLOps/Resources",\
-            metricValue="$memory_mb",\
-            defaultValue="0" \
+            metricName=ContainerMemoryUsage,metricNamespace=SecureAIMLOps/Resources,metricValue='$memory_mb',defaultValue=0 \
         --region ${REGION}
     
     # Failed authentication attempts
@@ -119,10 +107,7 @@ create_metric_filters() {
         --filter-name "FailedAuthentication" \
         --filter-pattern '[timestamp, ip, "authentication_failed"]' \
         --metric-transformations \
-            metricName="FailedAuthenticationAttempts",\
-            metricNamespace="SecureAIMLOps/Security",\
-            metricValue="1",\
-            defaultValue="0" \
+            metricName=FailedAuthenticationAttempts,metricNamespace=SecureAIMLOps/Security,metricValue=1,defaultValue=0 \
         --region ${REGION}
     
     echo -e "${GREEN}✅ Metric filters created successfully${NC}"

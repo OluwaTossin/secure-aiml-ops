@@ -66,7 +66,8 @@
       "Effect": "Allow",
       "Principal": {
         "AWS": [
-          "arn:aws:iam::455921291596:root"
+          "arn:aws:iam::455921291596:role/secure-aiml-ops-execution-role",
+          "arn:aws:iam::455921291596:role/secure-aiml-ops-task-role"
         ]
       },
       "Action": [
@@ -84,6 +85,9 @@
       "Condition": {
         "Bool": {
           "aws:SecureTransport": "true"
+        },
+        "StringEquals": {
+          "s3:x-amz-server-side-encryption": "AES256"
         }
       }
     },

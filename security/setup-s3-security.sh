@@ -65,10 +65,7 @@ secure_s3_bucket() {
     aws s3api put-public-access-block \
         --bucket ${bucket_name} \
         --public-access-block-configuration \
-            BlockPublicAcls=true,\
-            IgnorePublicAcls=true,\
-            BlockPublicPolicy=true,\
-            RestrictPublicBuckets=true
+            BlockPublicAcls=true,IgnorePublicAcls=true,BlockPublicPolicy=true,RestrictPublicBuckets=true
     
     # Apply bucket policy
     echo "Applying security policy..."
