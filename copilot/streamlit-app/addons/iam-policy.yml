@@ -1,0 +1,63 @@
+# IAM permissions addon for the streamlit-app service
+# This template grants the necessary AWS permissions for the Streamlit application
+
+Parameters:
+  App:
+    Type: String
+  Env:
+    Type: String
+
+Resources:
+  # IAM role for accessing AWS services
+  StreamlitAppTaskRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ecs-tasks.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy
+      Policies:
+        - PolicyName: StreamlitAppS3Access
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:GetObject
+                  - s3:PutObject
+                  - s3:DeleteObject
+                  - s3:ListBucket
+                Resource:
+                  - !Sub 'arn:aws:s3:::${App}-${Env}-aiml-data/*'
+                  - !Sub 'arn:aws:s3:::${App}-${Env}-aiml-data'
+        - PolicyName: StreamlitAppBedrockAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - bedrock:InvokeModel
+                  - bedrock:ListFoundationModels
+                Resource: '*'
+        - PolicyName: StreamlitAppCloudWatchAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - logs:CreateLogGroup
+                  - logs:CreateLogStream
+                  - logs:PutLogEvents
+                  - logs:DescribeLogStreams
+                  - cloudwatch:PutMetricData
+                Resource: '*'
+
+Outputs:
+  StreamlitAppTaskRoleArn:
+    Description: The ARN of the task role for the Streamlit application
+    Value: !GetAtt StreamlitAppTaskRole.Arn

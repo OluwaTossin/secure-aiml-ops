@@ -1,0 +1,67 @@
+# The manifest for the "streamlit-app" service.
+# Read the full specification for the "Load Balanced Web Service" type at:
+#  https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/
+
+# Your service name will be used in naming your resources like log groups, ECS services, etc.
+name: streamlit-app
+type: Load Balanced Web Service
+
+# Distribute traffic to your service.
+http:
+  # Requests to this path will be forwarded to your service.
+  # To match all requests you can use the "/" path.
+  path: '/'
+  # You can specify a custom health check path. The default is "/".
+  healthcheck: '/health'
+
+# Configuration for your containers and service.
+image:
+  # Docker build arguments. For additional overrides: https://aws.github.io/copilot-cli/docs/manifest/lb-web-service/#image-build
+  build: './streamlit/Dockerfile'
+
+# Optional fields for more advanced use-cases.
+#
+variables:
+  LOG_LEVEL: info
+  ENVIRONMENT: production
+  AWS_DEFAULT_REGION: eu-west-1
+
+secrets:
+  # AWS_ACCESS_KEY_ID: from AWS Systems Manager
+  # AWS_SECRET_ACCESS_KEY: from AWS Systems Manager
+  # These will be configured via IAM roles instead
+
+# You can override any of the values defined above by environment.
+environments:
+  production:
+    count:
+      min: 2
+      max: 20
+      cooldown: 300s
+      scale_in_cooldown: 180s
+      target_cpu: 70
+      target_memory: 80
+    variables:
+      LOG_LEVEL: info
+    # Enable logging
+    logging:
+      enable_logging: true
+
+# The number of CPU units for the task.
+cpu: 512
+# The amount of memory in MiB.
+memory: 1024
+# The platform architecture for your service.
+platform: linux/x86_64
+# Number of tasks that should be running in your service.
+count: 2
+
+# Optional fields for more advanced use-cases.
+network:
+  vpc:
+    enable_logs: true
+
+# You can override any of the values defined above by environment.
+# environments:
+#   production:
+#     count: 2

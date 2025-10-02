@@ -1,0 +1,54 @@
+{
+  "family": "secure-aiml-ops-streamlit",
+  "networkMode": "awsvpc",
+  "requiresCompatibilities": ["FARGATE"],
+  "cpu": "512",
+  "memory": "1024",
+  "executionRoleArn": "arn:aws:iam::455921291596:role/ecsTaskExecutionRole",
+  "taskRoleArn": "arn:aws:iam::455921291596:role/ecsTaskRole",
+  "containerDefinitions": [
+    {
+      "name": "streamlit-app",
+      "image": "455921291596.dkr.ecr.eu-west-1.amazonaws.com/secure-aiml-ops:streamlit-phase4",
+      "portMappings": [
+        {
+          "containerPort": 8501,
+          "protocol": "tcp"
+        }
+      ],
+      "essential": true,
+      "environment": [
+        {
+          "name": "LOG_LEVEL",
+          "value": "info"
+        },
+        {
+          "name": "ENVIRONMENT",
+          "value": "production"
+        },
+        {
+          "name": "AWS_DEFAULT_REGION",
+          "value": "eu-west-1"
+        }
+      ],
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/secure-aiml-ops-streamlit",
+          "awslogs-region": "eu-west-1",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:8501/health || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 60
+      }
+    }
+  ]
+}

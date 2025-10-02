@@ -1,0 +1,23 @@
+# Super-fast incremental update Dockerfile
+# Uses existing image as base to add only new features
+
+FROM 455921291596.dkr.ecr.eu-west-1.amazonaws.com/secure-aiml-ops:streamlit-latest
+
+# Switch to root to make changes
+USER root
+
+# Copy only the new chatbot file and optimizer
+COPY --chown=streamlit:streamlit streamlit/pages/5_🤖_AI_Chatbot.py /app/pages/
+COPY --chown=streamlit:streamlit streamlit/utils/bedrock_optimizer.py /app/utils/
+
+# Update the main app with chatbot navigation
+COPY --chown=streamlit:streamlit streamlit/app.py /app/
+
+# Switch back to streamlit user
+USER streamlit
+
+# Same health check and startup
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:8501/_stcore/health || exit 1
+
+CMD ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0", "--server.headless=true"]
